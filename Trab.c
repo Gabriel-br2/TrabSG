@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <math.h>
 
-//gcc -o squares squares.c -lglut -lGL
+// gcc -o main Trab.c -Wl,--copy-dt-needed-entries -lglut -lGL
 
 void translac(GLfloat x, GLfloat y, GLfloat z) {
     GLfloat matriz[16];
@@ -71,14 +71,14 @@ void Ortho(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat nea
 
 void display(void) {
     glClearColor (1.0, 1.0, 1.0, 0.0);
-    glClear (GL_COLOR_BUFFER_BIT);
+    glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
     glEnable(GL_DEPTH_TEST);
     glShadeModel (GL_SMOOTH);
 
-    float light_position[4] = {1, 1, 1, 0};
+    float light_position[4] = {1, 1, 10, 0};
     float light_ambient[4] = {0.2, 0.2, 0.2, 1.0};
     float light_diffuse[4] = {0.7, 0.7, 0.7, 0.7};
     float light_specular[4] = {1.0, 1.0, 1.0, 1.0};
@@ -160,7 +160,7 @@ void reshape (int w, int h) {
 
 int main(int argc, char** argv) {
     glutInit(&argc, argv);
-    glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);
+    glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize (600, 600);
     glutInitWindowPosition (10, 10);
     glutCreateWindow ("C3 building 3d display");
