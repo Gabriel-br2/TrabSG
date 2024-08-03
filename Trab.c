@@ -78,7 +78,7 @@ void display(void) {
     glEnable(GL_DEPTH_TEST);
     glShadeModel (GL_SMOOTH);
 
-    float light_position[4] = {1, 1, 10, 0};
+    float light_position[4] = {0, 0, 7, 0};
     float light_ambient[4] = {0.2, 0.2, 0.2, 1.0};
     float light_diffuse[4] = {0.7, 0.7, 0.7, 0.7};
     float light_specular[4] = {1.0, 1.0, 1.0, 1.0};
@@ -89,7 +89,7 @@ void display(void) {
     glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
 
     float material_ambient[4] = {0.1, 0.1, 0.1, 1.0};
-    float material_diffuse[4] = {0.2, 0.2, 0.2, 1.0};
+    float material_diffuse[4] = {0.3, 0.3, 0.3, 1.0};
     float material_specular[4]= {0.2, 0.2, 0.1, 1.0};
     float material_shininess[1] = {10.0};
     
@@ -100,8 +100,9 @@ void display(void) {
 
     glLoadIdentity ();
 
-    translac(0, 0, -10);
-    rotate(-35,1,0,0);
+    translac(0, -1, -12);
+    rotate(-12,0,1,0);
+    rotate(-45,1,0,0);
 
     glPushMatrix();
     scale(2, 5, 1);
@@ -115,18 +116,32 @@ void display(void) {
     glPopMatrix();
 
     glPushMatrix();
-    translac(3, -2.7, 0);
+    translac(3, -2.6, 0);
     rotate(-25,0,0,1);
-    scale(3, 2, 1);
+    scale(3.1, 2, 1);
     glutSolidCube(1);
     glPopMatrix();
 
     glPushMatrix();
-    translac(-3, -2.7, 0);
+    translac(-3, -2.6, 0);
     rotate(25,0,0,1);
-    scale(3, 2, 1);
+    scale(3.1, 2, 1);
     glutSolidCube(1);
     glPopMatrix();
+
+    glPushMatrix();
+    translac(-3, -2.6, 0);
+    rotate(25,0,0,1);
+    scale(3.9, 1.7, 1);
+    glutSolidCube(1);
+    glPopMatrix();
+
+    glPushMatrix();
+    translac(3, -2.6, 0);
+    rotate(-25,0,0,1);
+    scale(3.9, 1.7, 1);
+    glutSolidCube(1);
+    glPopMatrix();   
 
     glPushMatrix();
     translac(1, 3, 0);
@@ -142,7 +157,21 @@ void display(void) {
     glutSolidCube(1);
     glPopMatrix();
 
+    float ground_ambient[4] = {0.1, 0.1, 0.1, 1.0};
+    float ground_diffuse[4] = {0.1, 0.9, 0.1, 1.0};
+    float ground_specular[4]= {0.1, 0.9, 0.1, 1.0};
+    float ground_shininess[1] = {10.0};
+    
+    glMaterialfv(GL_FRONT, GL_AMBIENT, ground_ambient);
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, ground_diffuse);
+    glMaterialfv(GL_FRONT, GL_SPECULAR, ground_specular);
+    glMaterialfv(GL_FRONT, GL_SHININESS, ground_shininess);
 
+    glPushMatrix();
+    translac(0, 2, -1);
+    scale(15, 16, 1);
+    glutSolidCube(1);
+    glPopMatrix();
 
     glFlush ();
 }
@@ -152,7 +181,7 @@ void reshape (int w, int h) {
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
    
-    Frustum (-1.0, 1.0, -1.0, 1.0, 1.5, 20.0);
+    Frustum (-1.0, 1.0, -1.0, 1.0, 1.5, 25.0);
     //Ortho (-6.0, 6.0, -6.0, 6.0, 1.5, 20.0);
    
     glMatrixMode (GL_MODELVIEW);
