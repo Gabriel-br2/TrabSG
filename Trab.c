@@ -69,6 +69,54 @@ void Ortho(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat nea
     glMultMatrixf(matrix);
 }
 
+void drawRectangle(float width, float height, float length) {
+glBegin(GL_QUADS);
+
+// Frente
+glNormal3f(0.0f, 0.0f, 1.0f); // Normal para a face frontal
+glVertex3f(-width/2, -height/2, length/2);
+glVertex3f(width/2, -height/2, length/2);
+glVertex3f(width/2, height/2, length/2);
+glVertex3f(-width/2, height/2, length/2);
+
+// Traseira
+glNormal3f(0.0f, 0.0f, -1.0f); // Normal para a face traseira
+glVertex3f(-width/2, -height/2, -length/2);
+glVertex3f(width/2, -height/2, -length/2);
+glVertex3f(width/2, height/2, -length/2);
+glVertex3f(-width/2, height/2, -length/2);
+
+// Inferior
+glNormal3f(0.0f, -1.0f, 0.0f); // Normal para a face inferior
+glVertex3f(-width/2, -height/2, -length/2);
+glVertex3f(width/2, -height/2, -length/2);
+glVertex3f(width/2, -height/2, length/2);
+glVertex3f(-width/2, -height/2, length/2);
+
+// Superior
+glNormal3f(0.0f, 1.0f, 0.0f); // Normal para a face superior
+glVertex3f(-width/2, height/2, -length/2);
+glVertex3f(width/2, height/2, -length/2);
+glVertex3f(width/2, height/2, length/2);
+glVertex3f(-width/2, height/2, length/2);
+
+// Lateral esquerda
+glNormal3f(-1.0f, 0.0f, 0.0f); // Normal para a face lateral esquerda
+glVertex3f(-width/2, -height/2, -length/2);
+glVertex3f(-width/2, height/2, -length/2);
+glVertex3f(-width/2, height/2, length/2);
+glVertex3f(-width/2, -height/2, length/2);
+
+// Lateral direita
+glNormal3f(1.0f, 0.0f, 0.0f); // Normal para a face lateral direita
+glVertex3f(width/2, -height/2, -length/2);
+glVertex3f(width/2, height/2, -length/2);
+glVertex3f(width/2, height/2, length/2);
+glVertex3f(width/2, -height/2, length/2);
+
+glEnd();
+}
+
 void display(void) {
     glClearColor (1.0, 1.0, 1.0, 0.0);
     glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -89,8 +137,8 @@ void display(void) {
     glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
 
     float material_ambient[4] = {0.1, 0.1, 0.1, 1.0};
-    float material_diffuse[4] = {0.3, 0.3, 0.3, 1.0};
-    float material_specular[4]= {0.2, 0.2, 0.1, 1.0};
+    float material_diffuse[4] = {0.5, 0.5, 0.5, 1.0};
+    float material_specular[4]= {0.4, 0.4, 0.4, 1.0};
     float material_shininess[1] = {10.0};
     
     glMaterialfv(GL_FRONT, GL_AMBIENT, material_ambient);
@@ -105,56 +153,48 @@ void display(void) {
     rotate(-45,1,0,0);
 
     glPushMatrix();
-    scale(2, 5, 1);
-    glutSolidCube(1);
+    drawRectangle(2,5,1);
     glPopMatrix();
 
     glPushMatrix();
     translac(0, -2, 0);
-    scale(4, 2, 1);
-    glutSolidCube(1);
+    drawRectangle(4,2,1);
     glPopMatrix();
 
     glPushMatrix();
     translac(3, -2.6, 0);
     rotate(-25,0,0,1);
-    scale(3.1, 2, 1);
-    glutSolidCube(1);
+    drawRectangle(3.1,2,1);
     glPopMatrix();
 
     glPushMatrix();
     translac(-3, -2.6, 0);
     rotate(25,0,0,1);
-    scale(3.1, 2, 1);
-    glutSolidCube(1);
+    drawRectangle(3.1,2,1);
     glPopMatrix();
 
     glPushMatrix();
     translac(-3, -2.6, 0);
     rotate(25,0,0,1);
-    scale(3.9, 1.7, 1);
-    glutSolidCube(1);
+    drawRectangle(3.9,1.7,1);
     glPopMatrix();
 
     glPushMatrix();
     translac(3, -2.6, 0);
     rotate(-25,0,0,1);
-    scale(3.9, 1.7, 1);
-    glutSolidCube(1);
+    drawRectangle(3.9,1.7,1);
     glPopMatrix();   
 
     glPushMatrix();
     translac(1, 3, 0);
     rotate(35,0,0,1);
-    scale(2, 2, 1);
-    glutSolidCube(1);
+    drawRectangle(2,2,1);
     glPopMatrix();
 
     glPushMatrix();
     translac(-1, 3, 0);
     rotate(-35,0,0,1);
-    scale(3, 2, 1);
-    glutSolidCube(1);
+    drawRectangle(3,2,1);
     glPopMatrix();
 
     float ground_ambient[4] = {0.1, 0.1, 0.1, 1.0};
