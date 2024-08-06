@@ -236,8 +236,8 @@ void display(void) {
     glPopMatrix();
 
     glPushMatrix();
-    translac(-5,6,0);
-    drawLineBresenham(-5,0,5,5);
+    translac(0,0,1);
+    drawLineBresenham(-6,7,7,7);
     glPopMatrix();
 
     float ground_ambient[4] = {0.1, 0.1, 0.1, 1.0};
