@@ -8,10 +8,10 @@
 void translac(GLfloat x, GLfloat y, GLfloat z) {
     GLfloat matriz[16];
 
-    matriz[0] = 1.0f;  matriz[1] = 0.0f;  matriz[2] = 0.0f;  matriz[3] = 0.0f;
-    matriz[4] = 0.0f;  matriz[5] = 1.0f;  matriz[6] = 0.0f;  matriz[7] = 0.0f;
-    matriz[8] = 0.0f;  matriz[9] = 0.0f;  matriz[10] = 1.0f; matriz[11] = 0.0f;
-    matriz[12] = x;    matriz[13] = y;    matriz[14] = z;    matriz[15] = 1.0f;
+    matriz[0] = 1;  matriz[4] = 0;  matriz[8] = 0;  matriz[12] = x;
+    matriz[1] = 0;  matriz[5] = 1;  matriz[9] = 0;  matriz[13] = y;
+    matriz[2] = 0;  matriz[6] = 0;  matriz[10] = 1; matriz[14] = z;
+    matriz[3] = 0;  matriz[7] = 0;  matriz[11] = 0; matriz[15] = 1;
 
     glMultMatrixf(matriz);
 }
@@ -28,10 +28,10 @@ void rotate(GLfloat angle, GLfloat x, GLfloat y, GLfloat z) {
     float ty = t * y;
     float tz = t * z;
 
-    matrix[0]  = tx * x + c;     matrix[1]  = tx * y + s * z; matrix[2]  = tx * z - s * y; matrix[3]  = 0.0f; 
-    matrix[4]  = ty * x - s * z; matrix[5]  = ty * y + c;     matrix[6]  = ty * z + s * x; matrix[7]  = 0.0f;
-    matrix[8]  = tz * x + s * y; matrix[9]  = tz * y - s * x; matrix[10] = tz * z + c;     matrix[11] = 0.0f;
-    matrix[12] = 0.0f;          matrix[13] = 0.0f;          matrix[14] = 0.0f;           matrix[15] = 1.0f;
+    matrix[0]  = tx * x + c;     matrix[4]  = ty * x - s * z; matrix[8]  = tz * x + s * y; matrix[12]  = 0; 
+    matrix[1]  = tx * y + s * z; matrix[5]  = ty * y + c;     matrix[9]  = tz * y - s * x; matrix[13]  = 0;
+    matrix[2]  = tx * z - s * y; matrix[6]  = ty * z + s * x; matrix[10] = tz * z + c;     matrix[14] = 0;
+    matrix[3]  = 0;              matrix[7]  = 0;              matrix[11] = 0;              matrix[15] = 1;
 
     glMultMatrixf(matrix);
 }
@@ -39,32 +39,33 @@ void rotate(GLfloat angle, GLfloat x, GLfloat y, GLfloat z) {
 void scale(GLfloat sx, GLfloat sy, GLfloat sz) {
     GLfloat matrix[16];
 
-    matrix[0] = sx;  matrix[1] = 0.0f; matrix[2] = 0.0f; matrix[3] = 0.0f;
-    matrix[4] = 0.0f; matrix[5] = sy;  matrix[6] = 0.0f; matrix[7] = 0.0f;
-    matrix[8] = 0.0f; matrix[9] = 0.0f; matrix[10] = sz; matrix[11] = 0.0f;
-    matrix[12] = 0.0f; matrix[13] = 0.0f; matrix[14] = 0.0f; matrix[15] = 1.0f;
+    matrix[0] = sx; matrix[4] = 0;  matrix[8]  = 0;  matrix[12] = 0;
+    matrix[1] = 0;  matrix[5] = sy; matrix[9]  = 0;  matrix[13] = 0;
+    matrix[2] = 0;  matrix[6] = 0;  matrix[10] = sz; matrix[14] = 0;
+    matrix[3] = 0;  matrix[7] = 0;  matrix[11] = 0;  matrix[15] = 1;
 
     glMultMatrixf(matrix);
 }
 
 void Frustum(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat near, GLfloat far){
     GLfloat matrix[16];
-    
-    matrix[0] = 2.0 * near / (right - left);     matrix[1] = 0;                               matrix[2] = 0;                                 matrix[3] = 0; 
-    matrix[4] = 0;                               matrix[5] = 2.0 * near / (top - bottom);     matrix[6] = 0;                                 matrix[7] = 0;
-    matrix[8] = (right + left) / (right - left); matrix[9] = (top + bottom) / (top - bottom); matrix[10] =-(far + near) / (far - near);      matrix[11] = -1; 
-    matrix[12] = 0;                              matrix[13] = 0;                              matrix[14] = -2.0 * far * near / (far - near); matrix[15] = 0; 
-    
+       
+    matrix[0] = 2.0 * near / (right - left); matrix[4] = 0;                           matrix[8]  = (right + left) / (right - left);  matrix[12] = 0;
+    matrix[1] = 0;                           matrix[5] = 2.0 * near / (top - bottom); matrix[9]  = (top + bottom) / (top - bottom);  matrix[13] = 0;
+    matrix[2] = 0;                           matrix[6] = 0;                           matrix[10] = -(far + near) / (far - near);     matrix[14] = -2.0 * far * near / (far - near);
+    matrix[3] = 0;                           matrix[7] = 0;                           matrix[11] = -1;                               matrix[15] = 0;
+
     glMultMatrixf(matrix);
 }
 
 void Ortho(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat near, GLfloat far) {
     GLfloat matrix[16];
 
-    matrix[0]  = 2.0 / (right - left);                 matrix[1]  = 0;                                 matrix[2]  = 0;                             matrix[3]  = 0;
-    matrix[4]  = 0;                                    matrix[5]  = 2.0 / (top - bottom);              matrix[6]  = 0;                             matrix[7]  = 0;
-    matrix[8]  = 0;                                    matrix[9]  = 0;                                 matrix[10] = -2.0 / (far - near);           matrix[11] = 0;
-    matrix[12] = - (right + left) / (right - left);    matrix[13] = - (top + bottom) / (top - bottom); matrix[14] = - (far + near) / (far - near); matrix[15] = 1;
+    matrix[0] = 2.0 / (right - left); matrix[4] = 0;                      matrix[8]  = 0;                   matrix[12] = - (right + left) / (right - left);
+    matrix[1] = 0;                    matrix[5] =  2.0 / (top - bottom);  matrix[9]  = 0;                   matrix[13] =  - (top + bottom) / (top - bottom);
+    matrix[2] = 0;                    matrix[6] = 0;                      matrix[10] = -2.0 / (far - near); matrix[14] = - (far + near) / (far - near);
+    matrix[3] = 0;                    matrix[7] = 0;                      matrix[11] = 0;                   matrix[15] = 1;
+
 
     glMultMatrixf(matrix);
 }
