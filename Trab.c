@@ -118,6 +118,43 @@ void drawRectangle(float width, float height, float length) {
     glEnd();
 }
 
+void drawLineBresenham(float x1, float y1, float x2, float y2) {
+
+    float line_ambient[4] = {0.1, 0.1, 0.1, 1.0};
+    float line_diffuse[4] = {0.9, 0.1, 0.1, 1.0};
+    float line_specular[4]= {0.9, 0.1, 0.1, 1.0};
+    float line_shininess[1] = {10.0};
+    
+    glMaterialfv(GL_FRONT, GL_AMBIENT, line_ambient);
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, line_diffuse);
+    glMaterialfv(GL_FRONT, GL_SPECULAR, line_specular);
+    glMaterialfv(GL_FRONT, GL_SHININESS, line_shininess);
+
+    float dx = x2 - x1;
+    float dy = y2 - y1;
+    float x = x1;
+    float y = y1;
+
+    // Inicializa o erro
+    float e = 2 * dy - dx;
+
+    // Define o incremento para y
+    float incrementY = (dy >= 0) ? 1 : -1;
+
+    // Desenha as linhas
+    glBegin(GL_LINE_STRIP);
+    for (int i = 0; i <= dx; i++) {
+        glVertex2i(x, y);
+        if (e > 0) {
+            y += incrementY;
+            e -= 2 * dx;
+        }
+        e += 2 * dy;
+        x++;
+    }
+    glEnd();
+}
+
 void display(void) {
     glClearColor (1.0, 1.0, 1.0, 0.0);
     glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -196,6 +233,11 @@ void display(void) {
     translac(-1, 3, 0);
     rotate(-35,0,0,1);
     drawRectangle(3,2,1);
+    glPopMatrix();
+
+    glPushMatrix();
+    translac(-5,6,0);
+    drawLineBresenham(-5,0,5,5);
     glPopMatrix();
 
     float ground_ambient[4] = {0.1, 0.1, 0.1, 1.0};
