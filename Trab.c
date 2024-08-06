@@ -70,51 +70,51 @@ void Ortho(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat nea
 }
 
 void drawRectangle(float width, float height, float length) {
-glBegin(GL_QUADS);
+    glBegin(GL_QUADS);
 
-// Frente
-glNormal3f(0.0f, 0.0f, 1.0f); // Normal para a face frontal
-glVertex3f(-width/2, -height/2, length/2);
-glVertex3f(width/2, -height/2, length/2);
-glVertex3f(width/2, height/2, length/2);
-glVertex3f(-width/2, height/2, length/2);
+    // Frente
+    glNormal3f(0.0f, 0.0f, 1.0f); // Normal para a face frontal
+    glVertex3f(-width/2, -height/2, length/2);
+    glVertex3f(width/2, -height/2, length/2);
+    glVertex3f(width/2, height/2, length/2);
+    glVertex3f(-width/2, height/2, length/2);
 
-// Traseira
-glNormal3f(0.0f, 0.0f, -1.0f); // Normal para a face traseira
-glVertex3f(-width/2, -height/2, -length/2);
-glVertex3f(width/2, -height/2, -length/2);
-glVertex3f(width/2, height/2, -length/2);
-glVertex3f(-width/2, height/2, -length/2);
+    // Traseira
+    glNormal3f(0.0f, 0.0f, -1.0f); // Normal para a face traseira
+    glVertex3f(-width/2, -height/2, -length/2);
+    glVertex3f(width/2, -height/2, -length/2);
+    glVertex3f(width/2, height/2, -length/2);
+    glVertex3f(-width/2, height/2, -length/2);
 
-// Inferior
-glNormal3f(0.0f, -1.0f, 0.0f); // Normal para a face inferior
-glVertex3f(-width/2, -height/2, -length/2);
-glVertex3f(width/2, -height/2, -length/2);
-glVertex3f(width/2, -height/2, length/2);
-glVertex3f(-width/2, -height/2, length/2);
+    // Inferior
+    glNormal3f(0.0f, -1.0f, 0.0f); // Normal para a face inferior
+    glVertex3f(-width/2, -height/2, -length/2);
+    glVertex3f(width/2, -height/2, -length/2);
+    glVertex3f(width/2, -height/2, length/2);
+    glVertex3f(-width/2, -height/2, length/2);
 
-// Superior
-glNormal3f(0.0f, 1.0f, 0.0f); // Normal para a face superior
-glVertex3f(-width/2, height/2, -length/2);
-glVertex3f(width/2, height/2, -length/2);
-glVertex3f(width/2, height/2, length/2);
-glVertex3f(-width/2, height/2, length/2);
+    // Superior
+    glNormal3f(0.0f, 1.0f, 0.0f); // Normal para a face superior
+    glVertex3f(-width/2, height/2, -length/2);
+    glVertex3f(width/2, height/2, -length/2);
+    glVertex3f(width/2, height/2, length/2);
+    glVertex3f(-width/2, height/2, length/2);
 
-// Lateral esquerda
-glNormal3f(-1.0f, 0.0f, 0.0f); // Normal para a face lateral esquerda
-glVertex3f(-width/2, -height/2, -length/2);
-glVertex3f(-width/2, height/2, -length/2);
-glVertex3f(-width/2, height/2, length/2);
-glVertex3f(-width/2, -height/2, length/2);
+    // Lateral esquerda
+    glNormal3f(-1.0f, 0.0f, 0.0f); // Normal para a face lateral esquerda
+    glVertex3f(-width/2, -height/2, -length/2);
+    glVertex3f(-width/2, height/2, -length/2);
+    glVertex3f(-width/2, height/2, length/2);
+    glVertex3f(-width/2, -height/2, length/2);
 
-// Lateral direita
-glNormal3f(1.0f, 0.0f, 0.0f); // Normal para a face lateral direita
-glVertex3f(width/2, -height/2, -length/2);
-glVertex3f(width/2, height/2, -length/2);
-glVertex3f(width/2, height/2, length/2);
-glVertex3f(width/2, -height/2, length/2);
+    // Lateral direita
+    glNormal3f(1.0f, 0.0f, 0.0f); // Normal para a face lateral direita
+    glVertex3f(width/2, -height/2, -length/2);
+    glVertex3f(width/2, height/2, -length/2);
+    glVertex3f(width/2, height/2, length/2);
+    glVertex3f(width/2, -height/2, length/2);
 
-glEnd();
+    glEnd();
 }
 
 void display(void) {
