@@ -1,9 +1,21 @@
+/*
+
+Feito por:
+Fernando Piva Mendes - 149399
+Gabriel Rocha de Souza - 150888
+
+como rodar no terminal:
+
+1° - gcc -o trab Trab.c -Wl,--copy-dt-needed-entries -lglut -lGL
+
+2° - ./trab
+
+*/
+
 #include <GL/glut.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-
-// gcc -o main Trab.c -Wl,--copy-dt-needed-entries -lglut -lGL
 
 void translac(GLfloat x, GLfloat y, GLfloat z) {
     GLfloat matriz[16];
