@@ -285,7 +285,7 @@ void reshape (int w, int h) {
 int main(int argc, char** argv) {
     glutInit(&argc, argv);
     glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
-    glutInitWindowSize (600, 600);
+    glutInitWindowSize (800, 800);
     glutInitWindowPosition (10, 10);
     glutCreateWindow ("C3 building 3d display");
     glutDisplayFunc(display);
